@@ -72,34 +72,5 @@ class Tree(dict):
         return ( lineage[at_level]['label'] )
 
 if __name__ == '__main__':
-    """
-    d = {}
-    t = list()
-    lnr = 0
-    with open('/home/richard/Work/data/naming_and_annotations/reactome/ReactomePathwaysRelation.txt') as f:
-        for line in f:
-            (key, val) = line.split()
-            d[key] = val
-            t.append((key,val))
-            lnr += 1.0
-    tree=Tree()
-    react_nodes, node_dict, list_dict = tree.build_nodes_from_tuples(t)
-    nid = node_dict['R-HSA-352230']
-    njd = node_dict['R-HSA-382551']
-    rnode = react_nodes[list_dict[nid]]
-    lineage = [rnode]
-    ancestors = rnode['ancestors']
-    while ancestors :
-        if len(ancestors)==0 or not (ancestors[0] in list_dict.keys()) :
-           print ( pnode )
-           print ( ancestors)
-           break
-        pnode = react_nodes[list_dict[ancestors[0]]]
-        ancestors = pnode['ancestors']
-        lineage.append(pnode)
-    print ( lineage )
-    print ( lineage[-1]['label'] )
-    """
     atree = Tree('/home/richard/Work/data/naming_and_annotations/reactome/ReactomePathwaysRelation.txt')
     print( atree . return_ancestor_of( 'R-HSA-352230' ) )
-
