@@ -1,3 +1,14 @@
+from bs4 import BeautifulSoup
+import requests
+
+def get_classes_of ( metabolite='HMDB0000267', path=None ):
+    url = ['http://www.hmdb.ca/metabolites/','.xml']
+    response = requests.get(metabolite.join(url))
+    data = BeautifulSoup ( response.content )
+    return ( data.findAll(['super_class','class','sub_class']) )
+
+
+
 from lxml import etree
 
 def get_accession( child, common_name ) :
