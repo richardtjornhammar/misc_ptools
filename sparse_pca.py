@@ -47,7 +47,7 @@ class sPCA( object ) :
         if not X is None : # DID THE USER SUPPLY NEW DATA
             X = self.interpret_input(X)
         Xc = X - np.mean( X , 0 )
-        u, s, v = svds ( csc_matrix(Xc, dtype=float) , k=self.k_ )
+        u, s, v = self.svds_ ( self.smatrix_(Xc, dtype=float) , k=self.k_ )
         S = np.diag( s )
 
         self.F_   = np.dot(u,S)
