@@ -22,7 +22,7 @@ class sPCA( object ) :
     # IT USES THE SPARSE SVD ALGORITHM
     # FOUND IN SCIPY
     #
-    def __init__ ( self,X,k=2,fillna=None ) :
+    def __init__ ( self,X,k=-1,fillna=None ) :
         from scipy.sparse import csc_matrix
         from scipy.sparse.linalg import svds
         self.svds_,self.smatrix_ = svds,csc_matrix
@@ -54,13 +54,15 @@ class sPCA( object ) :
         if not X is None : # DID THE USER SUPPLY NEW DATA
             X = self.interpret_input(X)
         Xc = X - np.mean( X , 0 )
-        u, s, v = self.svds_ ( self.smatrix_(Xc, dtype=float) , k=self.k_ )
+        if self.k_<=0:
+            k_ = np.min(np.shape(X))-1
+        else:
+            k_ = self.k_
+        u, s, v = self.svds_ ( self.smatrix_(Xc, dtype=float) , k=k_ )
         S = np.diag( s )
-
         self.F_   = np.dot(u,S)
         self.var_ = s ** 2 / Xc.shape[0]
         self.explained_variance_ratio_ = self.var_/self.var_.sum()
         self.U_ , self.S_ , self.V_ = u,s,v
-        self.components_ = self.V_
-        
+        self.components_ = self.V_        
         return ( self.F_ )
