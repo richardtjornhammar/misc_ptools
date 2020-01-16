@@ -25,6 +25,7 @@ class sPCA( object ) :
     def __init__ ( self,X,k=2,fillna=None ) :
         from scipy.sparse import csc_matrix
         from scipy.sparse.linalg import svds
+        self.svds_,self.smatrix_ = svds,csc_matrix
         self.components_ = None
         self.F_ = None
         self.U_ , self.S_, self.V_ = None,None,None
@@ -44,6 +45,9 @@ class sPCA( object ) :
         else :
             self.X_ = X
         return( self.X_ )
+
+    def fit ( self , X=None ) :
+        self.fit_transform( X=X )
 
     def fit_transform ( self , X=None ) :
         X = self.X_
