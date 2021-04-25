@@ -32,7 +32,7 @@ def P1(N,M=None,p=None) :
     if (M%(N-1))==0 or ((M%p)==0 and p>=2) :
         return ( N==2 )
     else :
-       if (p-1)*(N+1)>=M*2:
+       if math.log(p) > math.log(M)*0.5:
            return ( True )
        return ( P1(N-1,M=M,p=p+1) )
 
