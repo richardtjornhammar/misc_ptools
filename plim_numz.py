@@ -1,29 +1,5 @@
 import math
 
-def P(N,M=None,p=None) :
-    if p is None :
-        p = 1
-    if M is None :
-        M = N
-    if (M%(N-1))==0 or ((M%p)==0 and p>=2) :
-        return ( M,N-1,p )
-    else :
-       if (p-1)*(N+1)>=M*2:
-           return ( '*',M,N-1,p )
-       return ( P(N-1,M=M,p=p+1) )
-
-
-def P0(N,M=None,p=None) :
-    if p is None :
-        p = 1
-    if M is None :
-        M = N
-    if (M%(N-1))==0 or ((M%p)==0 and p>=2) :
-        return ( N == 2 )
-    else :
-       return ( P0(N-1,M=M,p=p+1) )
-
-
 def P1(N,M=None,p=None) :
     if p is None :
         p = 1
